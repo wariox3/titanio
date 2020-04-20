@@ -25,7 +25,7 @@
             <hr class="divider my-4">
             {% for arRegistro in  arRegistros %}
                 <li class="list-group-item py-4 px-4">
-                    <a href="{{ path('inicio_documetal_detalle', {'id':arRegistro.codigoDocumentacionPk }) }}" class="fs-lg fw-500">{{ arRegistro.titulo | default("...") | upper }}</a>
+                    <a href="{{ path('inicio_documetal_detalle', {'id':arRegistro.codigoDocumentacionPk }) }}" class="fs-lg fw-500">{{ arRegistro.titulo | default("...")  }}</a>
                     <div class="fs-xs mt-1">
                         <a>{{ arRegistro.ruta }}</a>
                         <a  class="text-success">{{ arRegistro.codigoModuloFk }}</a>
