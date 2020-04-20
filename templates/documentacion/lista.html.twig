@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    {{ form_start(form) }}
+    <!-- Services Section -->
+    <section class="page-section" id="services">
+        <div class="container">
+            <h2 class="text-center mt-0"> Documentación semantica ERP vHELIO </h2>
+            <h5 class="text-center mt-0">Registros encontrados ( {{ arRegistros | length }} documentos)</h5>
+            <hr class="divider my-4">
+            <div class="input-group">
+                {{ form_widget(form.referencia, { 'attr': {'class': 'form-control', 'placeholder':'Consultar'} }) }}
+                <div class="input-group-append">
+                    {{ form_widget(form.btnFiltro, { 'attr': {'class': 'btn btn-primary'} }) }}
+                    <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        {% for  clave,valor  in arrModulos %}
+                            <a class="dropdown-item" href="{{  path('inicio_documetal_lista', {'modulo':valor}) }}">{{ clave }} </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <hr class="divider my-4">
+            {% for arRegistro in  arRegistros %}
+                <li class="list-group-item py-4 px-4">
+                    <a href="{{ path('inicio_documetal_detalle', {'id':arRegistro.codigoDocumentacionPk }) }}" class="fs-lg fw-500">{{ arRegistro.titulo | default("...") | upper }}</a>
+                    <div class="fs-xs mt-1">
+                        <a>{{ arRegistro.ruta }}</a>
+                        <a  class="text-success">{{ arRegistro.codigoModuloFk }}</a>
+                    </div>
+                    <div class="mt-2">
+                        <p class="text-justify">
+                            <span class="text-muted">{{ arRegistro.fechaActualizacion | date('Y-m-d') }}</span>
+                            {{ arRegistro.contenido |  default("Sin contenido ") |  slice(0, 2000) | striptags  }}
+                        </p>
+                    </div>
+                </li>
+            {% endfor %}
+        </div>
+    </section>
+    {{ form_end(form) }}
+
+{% endblock %}
