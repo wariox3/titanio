@@ -21,11 +21,11 @@ class InicioController extends Controller
 
 
 	/**
-	 * 	 * @Route("/documetal/{modulo}",requirements={"modulo":"\d+"},
+	 * 	 * @Route("/documetacion/{modulo}",requirements={"modulo":"\d+"},
 	 *       defaults={"modulo"=null},
 	 *      name="inicio_documetal_lista")
 	 */
-	public function documental(Request $request, $modulo)
+	public function documetacion(Request $request, $modulo)
 	{
 		$form = $this->createFormBuilder()
 			->add('referencia', TextType::class, array('required' => false ))
@@ -102,7 +102,7 @@ class InicioController extends Controller
 
 	/**
 	 *
-	 * @Route("/documetal/detalle/{id}", name="inicio_documetal_detalle")
+	 * @Route("/documetacion/detalle/{id}", name="inicio_documetal_detalle")
 	 */
 	public function detalle(Request $request, $id)
 	{
