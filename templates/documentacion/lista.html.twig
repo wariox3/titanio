@@ -9,23 +9,16 @@
             <h5 class="text-center mt-0">Registros encontrados ( {{ arRegistros | length }} documentos)</h5>
             <hr class="divider my-4">
             <div class="input-group">
-                {{ form_widget(form.referencia, { 'attr': {'class': 'form-control', 'placeholder':'Consultar'} }) }}
+                {{ form_widget(form.modulo, { 'attr':{'class': 'form-control'}} ) }}
+                {{ form_widget(form.criterio, { 'attr': {'class': 'form-control shadow-inset-2', 'placeholder':'Consultar'} }) }}
                 <div class="input-group-append">
-                    {{ form_widget(form.btnFiltro, { 'attr': {'class': 'btn btn-primary'} }) }}
-                    <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <div class="dropdown-menu">
-                        {% for  clave,valor  in arrModulos %}
-                            <a class="dropdown-item" href="{{  path('inicio_documetal_lista', {'modulo':valor}) }}">{{ clave }} </a>
-                        {% endfor %}
-                    </div>
+                    {{ form_widget(form.btnFiltro, { 'attr': {'class': 'btn btn-primary hidden-sm-down', 'placeholder':'Consultar en documentación'} }) }}
                 </div>
             </div>
             <hr class="divider my-4">
             {% for arRegistro in  arRegistros %}
                 <li class="list-group-item py-4 px-4">
-                    <a href="{{ path('inicio_documetal_detalle', {'id':arRegistro.codigoDocumentacionPk }) }}" class="fs-lg fw-500">{{ arRegistro.titulo | default("...")  }}</a>
+                    <a href="{{ path('documentacion_detalle', {'id':arRegistro.codigoDocumentacionPk }) }}" class="fs-lg fw-500">{{ arRegistro.titulo | default("...")  }}</a>
                     <div class="fs-xs mt-1">
                         <a>{{ arRegistro.ruta }}</a>
                         <a  class="text-success">{{ arRegistro.codigoModuloFk }}</a>
